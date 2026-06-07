@@ -1,5 +1,13 @@
 {% extends 'main.html' %} {% block content %}
 
 <h1>Room - {{room.name}}</h1>
+<p><b>Description: </b> {{room.description}}</p>
+<hr>
+<p><h1>Comment Section</h1></p>
+
+<!-- {% for message in messages %}
+<div><p>{{message.body }}</p></div>
+{% endfor %} -->
+
 
 {% endblock content %}
