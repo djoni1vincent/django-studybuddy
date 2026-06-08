@@ -8,7 +8,6 @@ This project follows the course tutorial:
 
 - **YouTube**: [Django Course - Dennis Ivy](https://www.youtube.com/watch?v=PtQiiknWUcI)
 
-![alt text](https://github.com/user-attachments/assets/01e47ae9-f462-4d22-af96-8db3d64f7560 "website")
 
 ## Project Overview
 
