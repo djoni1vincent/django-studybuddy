@@ -1,13 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My django site</title>
-  </head>
-  <body>
-    <nav>{% include 'navbar.html' %}</nav>
-
-    {% block content %} {% endblock content %}
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>My django site</title>
+    </head>
+    <body>
+        <nav>
+            {% include "navbar.html" %}
+        </nav>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% block content %}
+        {% endblock content %}
+    </body>
 </html>
