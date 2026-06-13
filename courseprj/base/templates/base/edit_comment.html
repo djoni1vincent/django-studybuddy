@@ -1,0 +1,12 @@
+{% extends "main.html" %}
+{% block content %}
+    <div class="comment-edit">
+        <h2>Edit Comment:</h2>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.body }}
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+{% endblock content %}

@@ -1,3 +1,4 @@
+from django import forms
 from django.forms import ModelForm
 
 from .models import Message, Room
@@ -13,3 +14,4 @@ class CommentForm(ModelForm):
     class Meta:
         model = Message
         fields = ["body"]
+        widgets = {"body": forms.Textarea(attrs={"rows": 2, "cols": 20})}

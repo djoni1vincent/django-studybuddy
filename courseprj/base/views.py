@@ -8,7 +8,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
 from .forms import CommentForm, RoomForm
-from .models import Room, Topic
+from .models import Message, Room, Topic
 
 # Create your views here.
 
@@ -107,12 +107,6 @@ def room(request, pk):
 
 
 @login_required(login_url="login")
-def createMessage(request):
-
-    return redirect()
-
-
-@login_required(login_url="login")
 def createRoom(request):
     form = RoomForm()
 
@@ -148,7 +142,6 @@ def updateRoom(request, pk):
 @login_required(login_url="login")
 def deleteRoom(request, pk):
     room = Room.objects.get(id=pk)
-
     if request.user != room.host:
         return HttpResponse("You are not allowed here!")
 
@@ -156,3 +149,32 @@ def deleteRoom(request, pk):
         room.delete()
         return redirect("home")
     return render(request, "base/delete.html", {"obj": room})
+
+
+@login_required(login_url="login")
+def deleteComment(request, pk):
+    comment = Message.objects.get(id=pk)
+    if request.user != comment.user:
+        return HttpResponse("You are not allowed here!")
+
+    if request.method == "POST":
+        comment.delete()
+        return redirect("room", comment.room.id)
+    return render(request, "base/delete.html", {"obj": comment})
+
+
+@login_required(login_url="login")
+def editComment(request, pk):
+    comment = Message.objects.get(id=pk)
+    if request.user != comment.user:
+        return HttpResponse("You are not allowed here!")
+
+    if request.method == "POST":
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            form.save()
+            return redirect("room", comment.room.id)
+    else:
+        form = CommentForm(instance=comment)
+
+    return render(request, "base/edit_comment.html", {"form": form})

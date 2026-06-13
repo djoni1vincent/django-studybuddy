@@ -24,6 +24,15 @@
                     <small>{{ message.created_at|timesince }} ago</small>
                 </p>
                 {{ message.body }}
+                <br>
+                {% if request.user == message.user %}
+                    <a href="{% url 'edit-comment' message.id %}">
+                        <button type="submit">Edit</button>
+                    </a>
+                    <a href="{% url 'delete-comment' message.id %}">
+                        <button type="submit">Delete</button>
+                    </a>
+                {% endif %}
                 <hr>
             </div>
         {% endfor %}
