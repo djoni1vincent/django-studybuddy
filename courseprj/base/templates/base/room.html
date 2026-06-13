@@ -3,6 +3,17 @@
     <h1>Room - {{ room.name }}</h1>
     <p><b>Description: </b> {{ room.description }}</p>
     <hr />
+    {% if request.user.is_authenticated %}
+        <div class="comment-form">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.body }}
+                <br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        <hr>
+    {% endif %}
     <div class="comment-wrapper">
         <h3>Comment Section</h3>
         <hr />

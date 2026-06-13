@@ -7,7 +7,7 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
-from .forms import RoomForm
+from .forms import CommentForm, RoomForm
 from .models import Room, Topic
 
 # Create your views here.
@@ -84,13 +84,32 @@ def home(request):
 def room(request, pk):
     room = Room.objects.get(id=pk)
     messages = room.message_set.all().order_by("-created_at")
+    if request.user.is_authenticated:
+        form = CommentForm()
+        if request.method == "POST":
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                message = form.save(commit=False)
+                message.user = request.user
+                message.room = room
+                message.save()
+                return redirect("room", room.id)
+    else:
+        form = CommentForm()
 
     context = {
         "room": room,
         "comments": messages,
+        "form": form,
     }
 
     return render(request, "base/room.html", context)
+
+
+@login_required(login_url="login")
+def createMessage(request):
+
+    return redirect()
 
 
 @login_required(login_url="login")
