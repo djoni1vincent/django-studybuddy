@@ -1,40 +1,54 @@
 {% extends "main.html" %}
 {% block content %}
-    <h1>Room - {{ room.name }}</h1>
-    <p><b>Description: </b> {{ room.description }}</p>
-    <hr />
-    {% if request.user.is_authenticated %}
-        <div class="comment-form">
-            <form action="" method="post">
-                {% csrf_token %}
-                {{ form.body }}
-                <br>
-                <input type="submit" value="Submit">
-            </form>
-        </div>
-        <hr>
-    {% endif %}
-    <div class="comment-wrapper">
-        <h3>Comment Section</h3>
-        <hr />
-        {% for message in comments %}
-            <div>
-                <p>
-                    <b>@{{ message.user }}</b>
-                    <small>{{ message.created_at|timesince }} ago</small>
-                </p>
-                {{ message.body }}
-                <br>
-                {% if request.user == message.user %}
-                    <a href="{% url 'edit-comment' message.id %}">
-                        <button type="submit">Edit</button>
-                    </a>
-                    <a href="{% url 'delete-comment' message.id %}">
-                        <button type="submit">Delete</button>
-                    </a>
-                {% endif %}
+    <style>
+    .room-container{
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+    }
+    </style>
+    <div class="room-container">
+        <div>
+            <h1>Room - {{ room.name }}</h1>
+            <p><b>Description: </b> {{ room.description }}</p>
+            <hr />
+            {% if request.user.is_authenticated %}
+                <div class="comment-form">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {{ form.body }}
+                        <br>
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
                 <hr>
+            {% endif %}
+            <div class="comment-wrapper">
+                <h3>Comment Section</h3>
+                <hr />
+                {% for message in comments %}
+                    <div>
+                        <p>
+                            <b>@{{ message.user }}</b>
+                            <small>{{ message.created_at|timesince }} ago</small>
+                        </p>
+                        {{ message.body }}
+                        <br>
+                        {% if request.user == message.user %}
+                            <a href="{% url 'edit-comment' message.id %}">
+                                <button type="submit">Edit</button>
+                            </a>
+                            <a href="{% url 'delete-comment' message.id %}">
+                                <button type="submit">Delete</button>
+                            </a>
+                        {% endif %}
+                        <hr>
+                    </div>
+                {% endfor %}
             </div>
-        {% endfor %}
+        </div>
+        <div>
+            <h3>Participants</h3>
+            <hr>
+        </div>
     </div>
 {% endblock content %}
