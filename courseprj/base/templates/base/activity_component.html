@@ -1,0 +1,87 @@
+{% load static %}
+<div class="activities__header">
+    <h2>Recent Activities</h2>
+</div>
+{% for message in room_messages %}
+    <div class="activities-page layout__body">
+        <div class="activities__box">
+            <div class="activities__boxHeader roomListRoom__header">
+                <a href="{% url 'user-profile' message.user.username %}"
+                   class="roomListRoom__author">
+                    <div class="avatar avatar--small">
+                        {% if message.user.profile.avatar %}
+                            <img src="{{ message.user.profile.avatar.url }}" />
+                        {% else %}
+                            <img src="{% static 'images/avatar.svg' %}" />
+                        {% endif %}
+                    </div>
+                    <p>
+                        <a href="{% url 'user-profile' message.user.username %}">@{{ message.user.username }}</a>
+                        <span>{{ message.created_at|timesince }} ago</span>
+                    </p>
+                </a>
+                <div class="roomListRoom__actions">
+                    {% if request.user.id == message.user.id %}
+
+                    <a href="{% url 'delete-comment' message.id %}"
+                        <svg version="1.1"
+                             xmlns="http://www.w3.org/2000/svg"
+                             width="32"
+                             height="32"
+                             viewBox="0 0 32 32">
+                            <title>remove</title>
+                            <path d="M27.314 6.019l-1.333-1.333-9.98 9.981-9.981-9.981-1.333 1.333 9.981 9.981-9.981 9.98 1.333 1.333 9.981-9.98 9.98 9.98 1.333-1.333-9.98-9.98 9.98-9.981z">
+                            </path>
+                        </svg>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="activities__boxContent">
+                <p>replied to post <a href="{% url 'room' message.room.id %}">“{{ message.room }}”</a></p>
+                <div class="activities__boxRoomContent">{{ message.body }}</div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+{% comment %} <div class="activities__box">
+    <div class="activities__boxHeader roomListRoom__header">
+        <a href="profile.html" class="roomListRoom__author">
+            <div class="avatar avatar--small active">
+                <img src="{% static 'images/avatar.svg' %}" />
+            </div>
+            <p>
+                @mr_spshuvo
+                <span>5 days ago</span>
+            </p>
+        </a>
+        <div class="roomListRoom__actions">
+            <a href="#">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                    <title>remove</title>
+                    <path d="M27.314 6.019l-1.333-1.333-9.98 9.981-9.981-9.981-1.333 1.333 9.981 9.981-9.981 9.98 1.333 1.333 9.981-9.98 9.98 9.98 1.333-1.333-9.98-9.98 9.98-9.981z">
+                    </path>
+                </svg>
+            </a>
+        </div>
+    </div>
+    <div class="activities__boxContent">
+        <p>replied to post “<a href="room.html">100 Days of code challenge!</a>”</p>
+        <div class="activities__boxRoomContent">
+            I’ll have to try this sometime. Really like this idea. Wanna talk about it? I ‘m....
+        </div>
+    </div>
+</div> {% endcomment %}
+{% comment %} <h3>Recent Activity</h3>
+<hr> {% endcomment %}
+{% comment %} {% for message in room_messages %}
+    <div>
+        <small>@<a href="{% url 'user-profile' message.user.username %}">{{ message.user.username }}</a> {{ message.created_at|timesince }} ago</small>
+        <p>replied to post <a href="{% url 'room' message.room.id %}">"{{ message.room }}</a>"</p>
+        <p>{{ message }}</p>
+        <a href="{% url 'delete-comment' message.id %}">
+            <button type="submit">Delete</button>
+        </a>
+        <hr>
+    </div>
+{% endfor %} {% endcomment %}

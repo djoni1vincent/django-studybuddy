@@ -7,7 +7,7 @@ from .models import Message, Room
 class RoomForm(ModelForm):
     class Meta:
         model = Room
-        fields = "__all__"
+        fields = ["topic", "name", "description"]
 
 
 class CommentForm(ModelForm):
