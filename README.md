@@ -8,6 +8,7 @@ This project follows the course tutorial:
 
 - **YouTube**: [Django Course - Dennis Ivy](https://www.youtube.com/watch?v=PtQiiknWUcI)
 
+![alt text](SCR-20260616-tmct.png)
 
 ## Project Overview
 
@@ -20,108 +21,61 @@ This is a full-stack Django application that demonstrates key concepts including
 - Database migrations
 - URL routing
 
-## Project Structure
-
-```
-courseprj/
-├── manage.py                 # Django management script
-├── db.sqlite3               # SQLite database
-├── courseprj/               # Main project settings
-│   ├── settings.py          # Django settings
-│   ├── urls.py              # Project URL configuration
-│   ├── asgi.py              # ASGI config
-│   └── wsgi.py              # WSGI config
-├── base/                    # Main application
-│   ├── models.py            # Data models
-│   ├── views.py             # View logic
-│   ├── forms.py             # Form definitions
-│   ├── urls.py              # App URL routes
-│   ├── admin.py             # Django admin config
-│   ├── migrations/          # Database migrations
-│   └── templates/
-│       └── base/            # App templates
-│           ├── home.html    # Home page
-│           ├── room.html    # Room detail view
-│           └── room_form.html # Room creation/edit form
-└── templates/
-    ├── main.html            # Base template
-    └── navbar.html          # Navigation component
-```
-
 ## Features
 
-- **Room Management**: Create, read, update, and delete rooms
-- **Discussion Topics**: Organize rooms by topics
-- **User Hosting**: Users can host and manage their rooms
-- **Message System**: Send and receive messages within rooms
-- **Responsive Design**: Mobile-friendly templates
+- User registration, authentication, and profile management
+- Create, edit, and delete rooms
+- Comments inside rooms (create, edit, delete)
+- Search rooms by name, topic, and description
+- Topic categories for rooms with room count
+- Dedicated topics browsing page (`/topics/`)
+- Recent activity feed (`/activities/`)
+- User profiles with avatar upload and bio
+- Responsive layout with mobile-friendly navigation
 
-## Installation
+## Stack
 
-1. **Clone the repository**
+- Python 3.13
+- Django 6.0
+- SQLite
+- uv
 
-   ```bash
-   cd /Users/djoni1vincent/dev/Django/django-course
-   ```
-
-2. **Create a virtual environment**
-
-   ```bash
-   python -m venv venv
-   source venv/bin/activate
-   ```
-
-3. **Install dependencies**
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Apply migrations**
-
-   ```bash
-   cd courseprj
-   python manage.py migrate
-   ```
-
-5. **Create a superuser** (for admin access)
-   ```bash
-   python manage.py createsuperuser
-   ```
-
-## Running the Application
+## Setup
 
 ```bash
-cd courseprj
+uv sync
+python manage.py migrate
 python manage.py runserver
 ```
 
-The application will be available at `http://localhost:8000/`
+Open http://127.0.0.1:8000/
 
-Access the admin panel at `http://localhost:8000/admin/`
+## Project Structure
 
-## Models
+- `base/` — main app (models, views, templates, forms)
+- `courseprj/` — project config (settings, urls)
+- `templates/` — shared base templates (main.html, navbar)
+- `static/` — static files (styles, scripts, images)
 
-### Topic
+## URL Reference
 
-- Represents discussion topics for organizing rooms
+| URL | Name | Description |
+|-----|------|-------------|
+| `/` | `home` | Main page with rooms, topics, and activity |
+| `/topics/` | `topics` | Browse all topics |
+| `/activities/` | `activities` | Recent activity feed |
+| `/login/` | `login` | Login page |
+| `/register/` | `register` | Registration page |
+| `/logout/` | `logout` | Logout |
+| `/profile/<username>/` | `user-profile` | User profile page |
+| `/room/<pk>/` | `room` | Room detail with comments |
+| `/create-room/` | `create-room` | Create a new room |
+| `/update-room/<pk>/` | `update-room` | Edit a room |
+| `/delete-room/<pk>/` | `delete-room` | Delete a room |
+| `/update-user/` | `update-user` | Edit user profile |
+| `/delete-comment/<pk>/` | `delete-comment` | Delete a comment |
+| `/edit-comment/<pk>/` | `edit-comment` | Edit a comment |
 
-### Room
-
-- Main model for discussion rooms
-- Fields: name, description, topic, host, created, updated
-
-### Message
-
-- User messages within rooms
-- Fields: user, room, body, created, updated
-
-## Technologies Used
-
-- **Django**: Web framework
-- **Python**: Programming language
-- **SQLite**: Database (development)
-- **HTML/CSS**: Frontend templates
 
 ## Learning Outcomes
 
@@ -135,19 +89,9 @@ By following this project, you'll learn:
 - URL routing and namespacing
 - Admin interface customization
 
-## Next Steps
-
-- Extend authentication with email verification
-- Add search functionality for rooms
-- Implement real-time messaging with WebSockets
-- Deploy to production (Heroku, AWS, etc.)
 
 ## Resources
 
 - [Django Official Documentation](https://docs.djangoproject.com/)
 - [Django Best Practices](https://docs.djangoproject.com/en/stable/topics/)
 - [Python Official Documentation](https://www.python.org/doc/)
-
----
-
-Happy learning! 🎓
