@@ -15,8 +15,8 @@
         </label>
     </form>
     <div class="mobile-menuItems">
-        <a class="btn btn--main btn--pill" href="#">Browse Topics</a>
-        <a class="btn btn--main btn--pill" href="#">Recent Activities</a>
+        <a class="btn btn--main btn--pill" href="{% url 'topics' %}">Browse Topics</a>
+        <a class="btn btn--main btn--pill" href="{% url 'activities' %}">Recent Activities</a>
     </div>
 </div>
 <div class="roomList__header">
@@ -89,15 +89,3 @@
         </div>
     </div>
 {% endfor %}
-{% comment %} {% for room in rooms %}
-    <div>
-        {% if request.user == room.host %}
-            <a href="{% url 'update-room' room.id %}">Edit</a>
-            <a href="{% url 'delete-room' room.id %}">Delete</a>
-        {% endif %}
-        <span>@<a href="{% url 'user-profile' room.host.username %}">{{ room.host }}</a></span>
-        <h4><a href="{% url 'room' room.id %}">{{ room.name }}</a></h4>
-        <small>{{ room.topic.name }}</small>
-        <hr />
-    </div>
-{% endfor %} {% endcomment %}

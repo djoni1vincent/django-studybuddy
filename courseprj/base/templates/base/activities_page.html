@@ -1,0 +1,11 @@
+{% extends "main.html" %}
+{% load static %}
+{% block content %}
+<main class="activities-page layout layout--2">
+    <div class="container">
+        <div class="roomList">
+            {% include "base/activity_component.html" %}
+        </div>
+    </div>
+</main>
+{% endblock content %}

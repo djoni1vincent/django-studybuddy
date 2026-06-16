@@ -143,6 +143,29 @@ def updateUser(request):
     return render(request, "base/update_user.html", {"user": user})
 
 
+def topicsPage(request):
+    q = request.GET.get("q") if request.GET.get("q") is not None else ""
+    rooms = Room.objects.filter(
+        Q(topic__name__icontains=q) | Q(name__icontains=q) | Q(description__icontains=q)
+    )
+    topics = Topic.objects.annotate(room_count=Count("room"))
+    room_count = rooms.count()
+    room_messages = Message.objects.filter(Q(room__topic__name__icontains=q))
+    context = {
+        "rooms": rooms,
+        "topics": topics,
+        "room_count": room_count,
+        "room_messages": room_messages,
+    }
+    return render(request, "base/topics_page.html", context)
+
+
+def activitiesPage(request):
+    room_messages = Message.objects.all()
+    context = {"room_messages": room_messages}
+    return render(request, "base/activities_page.html", context)
+
+
 @login_required(login_url="login")
 def createRoom(request):
     form = RoomForm()
