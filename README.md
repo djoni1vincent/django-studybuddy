@@ -1,4 +1,4 @@
-# Django Course Project
+# StudyBuddy Project
 
 A Django-based web application for managing courses, discussion rooms, and community interactions.
 
