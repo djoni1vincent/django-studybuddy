@@ -4,6 +4,8 @@ A Django learning project — a discussion room (forum) application with topics 
 
 Built while following the [Django 7 Hour Course (Dennis Ivy)](https://www.youtube.com/watch?v=PtQiiknWUcI) and Django's official documentation.
 
+![alt text](SCR-20260616-tmct.png)
+
 ## Features
 
 - User registration, authentication, and profile management
@@ -58,3 +60,7 @@ Open http://127.0.0.1:8000/
 | `/update-user/` | `update-user` | Edit user profile |
 | `/delete-comment/<pk>/` | `delete-comment` | Delete a comment |
 | `/edit-comment/<pk>/` | `edit-comment` | Edit a comment |
+
+
+
+
